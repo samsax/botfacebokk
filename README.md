@@ -9,7 +9,6 @@ Para poder seguir todos los pasos correctamente de este workshop, tendras que te
 * NPM (~ 3.10.10)
 * git
 * Algun editor de texto (**Atom**, Sublime, Visual Studio Code)
-* express (`npm install express -g`)
 
 ## Paso 2:
 ### Clona el proyecto y descarga las dependencias
