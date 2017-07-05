@@ -40,6 +40,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/message', (req, res) => {
+  console.log(req.query);
   res.json({});
 });
 
