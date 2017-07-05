@@ -1,8 +1,24 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #0084ff;
+  font-family: 'Helvetica';
+  color: white;
 }
 
-a {
-  color: #00B7FF;
+.wrapper {
+  text-align: center;
+  background-color: #0084ff;
+}
+
+.logo-right {
+  width: 150px;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+}
+
+.logo-left {
+  width: 80px;
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
 }
