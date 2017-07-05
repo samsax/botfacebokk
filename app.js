@@ -1,11 +1,50 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const LUISClient = require("luis-node-sdk");
 
-var routes = require('./routes/index');
+const routes = require('./routes/index');
+
+let LUISclient = LUISClient({
+  appId: process.env.LUIS_APPID || 'f63da86c-5bdb-4b64-a889-d07bfb9bd43f',
+  appKey: process.env.LUIS_APPKEY || '9b9a2e025a5c458bb1a477816916e023',
+  verbose: true
+});
+
+LUISclient.predict("Quiero comer pizza", {
+  //On success of prediction
+  onSuccess: function (response) {
+    printOnSuccess(response);
+  },
+
+  //On failure of prediction
+  onFailure: function (err) {
+    console.error(err);
+  }
+});
+
+  let printOnSuccess = function (response) {
+    console.log("Query: " + response.query);
+    console.log("Top Intent: " + response.topScoringIntent.intent);
+    console.log("Entities:", response.entities);
+    for (var i = 1; i <= response.entities.length; i++) {
+      console.log(i + "- " + response.entities[i - 1].entity);
+      // console.log(response.entities[i-1].resolution);
+    }
+    if (typeof response.dialog !== "undefined" && response.dialog !== null) {
+      console.log("Dialog Status: " + response.dialog.status);
+      if (!response.dialog.isFinished()) {
+        console.log("Dialog Parameter Name: " + response.dialog.parameterName);
+        console.log("Dialog Prompt: " + response.dialog.prompt);
+      }
+    }
+  };
+
+
+
 
 var app = express();
 
@@ -53,6 +92,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
