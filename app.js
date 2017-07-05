@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
+app.get('/message', (req, res) => {
+  res.json({});
+});
+
 app.post('/message', (req, res) => {
   res.json({});
 });
