@@ -6,8 +6,16 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const LUISClient = require("luis-node-sdk");
 const config = require("./config/config");
+const Smooch = require('smooch-core');
 
 var app = express();
+
+// Smooch
+const smooch = new Smooch({
+    keyId: config.SMOOCH.KEYID,
+    secret: config.SMOOCH.SECRET,
+    scope: 'app'
+});
 
 // Luis
 let LUISclient = LUISClient({
